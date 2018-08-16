@@ -1,67 +1,74 @@
 // Modules to control application life and create native browser window
-const electron = require('electron')
-const {app, BrowserWindow} = electron
-const fs = require('fs')
+const electron = require('electron'),
+	{ app, BrowserWindow } = electron,
+	fs = require('fs');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let alwaysOnTopWindow
+let mainWindow;
 
-function createWindow () {
-	const screenSize = electron.screen.getPrimaryDisplay().workAreaSize,
-		minWidth = width = 480,
-		minHeight = height = 270,
-		x = screenSize.width - width,
-		y = screenSize.height - height;
+function createWindow() {
+  const screenSize = electron.screen.getPrimaryDisplay().workAreaSize,
+    width = 480,
+    height = 270,
+    minWidth = width,
+    minHeight = height,
+    x = screenSize.width - width,
+    y = screenSize.height - height;
 
-	let alwaysOnTopWindow = new BrowserWindow({width, height, minWidth, minHeight, x, y, show: false, backgroundColor: '#222f3e', frame: false, titleBarStyle: 'customButtonsOnHover'})
-	alwaysOnTopWindow.setAlwaysOnTop(true, 'floating')
-	alwaysOnTopWindow.setVisibleOnAllWorkspaces(true)
-	alwaysOnTopWindow.setFullScreenable(false)
+  mainWindow = new BrowserWindow({
+    width,
+    height,
+    minWidth,
+    minHeight,
+    x,
+    y,
+    show: false,
+    backgroundColor: '#222f3e',
+    frame: false,
+    titleBarStyle: 'customButtonsOnHover',
+  });
 
-	// and load the index.html of the app.
-	alwaysOnTopWindow.loadURL('https://youtube.com/tv')
-	alwaysOnTopWindow.webContents.on('did-finish-load', function() {
-	 	alwaysOnTopWindow.webContents.insertCSS(fs.readFileSync('./renderer.css').toString())
-		alwaysOnTopWindow.webContents.executeJavaScript(fs.readFileSync('./renderer.js').toString())
-	});
-	alwaysOnTopWindow.once('ready-to-show', () => {
-		alwaysOnTopWindow.show()
-	})
+  // Keep window always on top even with full screen apps
+  mainWindow.setAlwaysOnTop(true, 'floating');
+  mainWindow.setVisibleOnAllWorkspaces(true);
+  mainWindow.setFullScreenable(false);
 
-	// Open the DevTools.
-	// alwaysOnTopWindow.webContents.openDevTools()
+  // Load YouTube TV
+  mainWindow.loadURL('https://youtube.com/tv');
 
-	// Emitted when the window is closed.
-	alwaysOnTopWindow.on('closed', function () {
-		// Dereference the window object, usually you would store windows
-		// in an array if your app supports multi windows, this is the time
-		// when you should delete the corresponding element.
-		alwaysOnTopWindow = null
-	})
+  // Inject script and css once loaded
+  mainWindow.webContents.on('did-finish-load', function() {
+    mainWindow.webContents.insertCSS(
+      fs.readFileSync('./renderer.css').toString()
+    );
+    mainWindow.webContents.executeJavaScript(
+      fs.readFileSync('./renderer.js').toString()
+    );
+  });
+
+  // Hide until window has mostly loaded content
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
+
+  // Destroy object, close app
+  mainWindow.on('closed', function() {
+    mainWindow = null;
+  });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
+app.on('window-all-closed', function() {
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
 
-app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (alwaysOnTopWindow === null) {
-    createWindow()
+app.on('activate', function() {
+  if (mainWindow === null) {
+    createWindow();
   }
-})
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+});

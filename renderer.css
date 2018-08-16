@@ -5,6 +5,7 @@
   margin: 1px;
 }
 
-.guide-button {
+.guide-button,
+.overlay-partials-menu-item {
   -webkit-app-region: no-drag;
 }
