@@ -8,12 +8,12 @@ let alwaysOnTopWindow
 
 function createWindow () {
 	const screenSize = electron.screen.getPrimaryDisplay().workAreaSize,
-		width = 564,
-		height = 317,
+		minWidth = width = 480,
+		minHeight = height = 270,
 		x = screenSize.width - width,
 		y = screenSize.height - height;
-	
-	let alwaysOnTopWindow = new BrowserWindow({width, height, x, y, show: false, backgroundColor: '#222f3e', frame: false, titleBarStyle: 'customButtonsOnHover'})
+
+	let alwaysOnTopWindow = new BrowserWindow({width, height, minWidth, minHeight, x, y, show: false, backgroundColor: '#222f3e', frame: false, titleBarStyle: 'customButtonsOnHover'})
 	alwaysOnTopWindow.setAlwaysOnTop(true, 'floating')
 	alwaysOnTopWindow.setVisibleOnAllWorkspaces(true)
 	alwaysOnTopWindow.setFullScreenable(false)
