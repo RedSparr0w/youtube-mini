@@ -1,0 +1,10 @@
+#guide,
+.super-pivot-header {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  margin: 1px;
+}
+
+.guide-button {
+  -webkit-app-region: no-drag;
+}

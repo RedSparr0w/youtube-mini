@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const electron = require('electron')
 const {app, BrowserWindow} = electron
+const fs = require('fs')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,7 +21,10 @@ function createWindow () {
 
 	// and load the index.html of the app.
 	alwaysOnTopWindow.loadURL('https://youtube.com/tv')
-
+	alwaysOnTopWindow.webContents.on('did-finish-load', function() {
+	 	alwaysOnTopWindow.webContents.insertCSS(fs.readFileSync('./renderer.css').toString())
+		alwaysOnTopWindow.webContents.executeJavaScript(fs.readFileSync('./renderer.js').toString())
+	});
 	alwaysOnTopWindow.once('ready-to-show', () => {
 		alwaysOnTopWindow.show()
 	})
