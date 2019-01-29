@@ -40,10 +40,10 @@ function createWindow() {
   // Inject script and css once loaded
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.webContents.insertCSS(
-      fs.readFileSync('./renderer.css').toString()
+      fs.readFileSync(`${__dirname}/renderer.css`).toString()
     );
     mainWindow.webContents.executeJavaScript(
-      fs.readFileSync('./renderer.js').toString()
+      fs.readFileSync(`${__dirname}/renderer.js`).toString()
     );
   });
 
