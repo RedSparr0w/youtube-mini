@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "lint": "eslint \"**/*.js\"",
+    "start": "electron .",
+    "build": "electron-packager ./ \"YouTube Mini\" --platform=win32 --arch=ia32 --icon=./logo.ico --overwrite"
   },
   "repository": "https://github.com/RedSparr0w/YouTube-Mini",
   "keywords": [
@@ -17,6 +19,11 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^2.0.0"
+    "electron": "^2.0.7",
+    "eslint-plugin-mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "electron-packager": "^12.2.0",
+    "eslint": "^5.4.0"
   }
 }
