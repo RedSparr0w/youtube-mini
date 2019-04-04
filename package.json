@@ -11,19 +11,15 @@
   "repository": "https://github.com/RedSparr0w/YouTube-Mini",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "YouTube"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^2.0.7",
-    "eslint-plugin-mocha": "^5.2.0"
+    "electron": "^4.1.4"
   },
   "dependencies": {
-    "electron-packager": "^12.2.0",
-    "eslint": "^5.4.0"
+    "electron-packager": "^13.1.1",
+    "eslint": "^5.16.0"
   }
 }
