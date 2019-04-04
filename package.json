@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint \"**/*.js\"",
     "start": "electron .",
-    "build": "electron-packager ./ \"YouTube Mini\" --platform=win32 --arch=ia32 --icon=./logo.ico --overwrite"
+    "build": "electron-packager ./builds \"YouTube Mini\" --platform=win32 --arch=ia32 --icon=./logo.ico --overwrite"
   },
   "repository": "https://github.com/RedSparr0w/YouTube-Mini",
   "keywords": [
