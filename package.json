@@ -1,25 +1,28 @@
 {
   "name": "YouTube-Mini",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
-  "main": "main.js",
-  "scripts": {
-    "lint": "eslint \"**/*.js\"",
-    "start": "electron .",
-    "build": "electron-packager ./builds \"YouTube Mini\" --platform=win32 --arch=ia32 --icon=./logo.ico --overwrite"
+  "description": "",
+  "author": "Danial Nickford",
+  "license": "CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thebedpeople/accounts2table.git"
   },
-  "repository": "https://github.com/RedSparr0w/YouTube-Mini",
   "keywords": [
     "Electron",
     "YouTube"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "main": "main.js",
+  "scripts": {
+    "lint": "eslint \"**/*.js\"",
+    "start": "electron .",
+    "build": "electron-builder"
+  },
   "devDependencies": {
-    "electron": "^4.1.4"
+    "electron": "^4.1.4",
+    "electron-builder": "^20.39.0",
+    "eslint": "^5.16.0"
   },
   "dependencies": {
-    "electron-packager": "^13.1.1",
-    "eslint": "^5.16.0"
   }
 }

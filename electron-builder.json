@@ -1,0 +1,25 @@
+{
+  "appId": "com.redsparr0w.youtubemini",
+  "copyright": "Copyright © 2019 RedSparr0w",
+  "directories": {
+    "output": "release"
+  },
+  "nsis": {
+    "oneClick": true,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": false
+  },
+  "win": {
+    "target": [
+      "nsis",
+      "portable"
+    ],
+    "extraFiles": [
+      {
+        "filter": [
+          "*.txt"
+        ]
+      }
+    ]
+  }
+}
